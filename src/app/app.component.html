@@ -1,0 +1,34 @@
+<div style="display: flex; flex-direction: column;align-items: center;width: 100%;
+justify-content: space-around;">
+<app-navbar></app-navbar>
+  <div >
+    <!-- <h1>Angular app </h1> -->
+    <h2>{{ parentMsg | uppercase}}</h2>
+    ng g module app-routing --module app --flat
+    <br>
+      ng g(generate) module(module) app-module(name our wish) --module(to create inside existing) app(existing folder) --flat(into root folder i.e app) 
+
+    <app-post
+      [parentMsg]="parentMsg"
+      (messageEvent)="receivemessage($event)"
+    ></app-post>
+    <p>Hirings for</p>
+        <ul><li *ngFor ="let post of childMsg">{{post}}</li></ul>
+        
+        
+    <li>still vacant positions are</li>
+    <ul><li *ngFor ="let post of childMsg2;let i=index;" >
+      <div *ngIf = 'i!=2;else filledpost'>{{post}}</div>
+      <ng-template #filledpost><s>{{post}}</s></ng-template>
+    </li></ul>
+  </div>
+
+  <!-- <div> -->
+    
+
+    <!-- <app-task2></app-task2> -->
+    <!-- <app-pipes-task></app-pipes-task> -->
+    <!-- <app-task3-forms></app-task3-forms> -->
+  <!-- </div> -->
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,8 @@
+.img-styling{
+    border: 10px solid rgb(235, 92, 92);
+}
+
+.post_component_whole_div{
+    display: flex;
+    flex-direction: column;
+}

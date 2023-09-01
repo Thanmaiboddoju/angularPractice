@@ -1,0 +1,142 @@
+<div class="post_component_whole_div">
+  <p>post works!</p>
+  <p>{{ title }}</p>
+  <h2>{{ parentMsg | lowercase}}</h2>
+  <app-postlist [vacancies]="vacantPosts"></app-postlist>
+
+  <img
+    [src]="imagePath"
+    [class.img-styling]="title"
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    (keyup)="keyupFunction($event)"
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    (keyup.enter)="keyenter(username.value)"
+    #username
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    placeholder="userID"
+    [(ngModel)]="userId"
+    (keyup.enter)="two_way_binded()"
+    style="width: min-content"
+  />
+  <h2>Employees details are as follows</h2>
+
+  <table *ngIf="employeeDetails.length > 0; else nodata">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+    <tr *ngFor="let employee of employeeDetails; let p = index">
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.name }}</td>
+      <td><button (click)="removeEmployee(p)">Remove employee</button></td>
+      <!-- <td>{{employee | json}}</td> -->
+    </tr>
+  </table>
+
+  <ng-template #nodata>No employees are listed yet</ng-template>
+
+  <input
+    type="text"
+    placeholder="new employee id"
+    [(ngModel)]="newemployeeId"
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    placeholder="new employee name"
+    [(ngModel)]="newemployeename"
+    style="width: min-content"
+  />
+  <button (click)="addEmployee(newemployeeId, newemployeename)">
+    Add Employee
+  </button>
+  <p *ngFor = 'let employee of newEmployeeDetailsList'>{{employee | json}}</p>
+  
+  <input
+    type="text"
+    placeholder="new employee name"
+    [(ngModel)]="newemployeename2"
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    placeholder="new employee dept"
+    [(ngModel)]="newemployeedept"
+    style="width: min-content"
+  />
+  <input
+    type="text"
+    placeholder="new employee guide"
+    [(ngModel)]="newemployeeguide"
+    style="width: min-content"
+  />
+  <button (click)="addNewEmployee( newemployeename2,newemployeedept,newemployeeguide)">
+    Add New Employee
+  </button>
+  <div>
+    <h2>Choose the one you like the most</h2>
+    <div [ngStyle]="{ display: 'flex', gap: '16px' }">
+      <button
+        (click)="setFavoriteSeason('summer')"
+        [ngStyle]="{backgroundColor:switchfavoriteSeason=='summer'?'orange':'',
+                    color:switchfavoriteSeason=='summer'?'white':'',
+                  }">
+        Summer
+      </button>
+      <button (click)="setFavoriteSeason('winter')"
+      [ngStyle]="{backgroundColor:switchfavoriteSeason=='winter'?'#fae1e1':'',
+      color:switchfavoriteSeason=='winter'?'green':'',
+    }">Winter</button>
+      <button (click)="setFavoriteSeason('rainy')"[ngStyle]="{backgroundColor:switchfavoriteSeason=='rainy'?'gray':'',
+      color:switchfavoriteSeason=='rainy'?'white':'',
+    }">Rainy</button>
+    <button (click)="setFavoriteSeason('none')">None</button>
+    </div>
+  </div>
+
+  <div [ngSwitch]="switchfavoriteSeason">
+    <div *ngSwitchCase="'summer'">
+      <h3>Wed, 21 Apr, 2023 – Sat, 23 June, 2023</h3>
+      <img
+        width="350px"
+        height="250px"
+        src="https://www.lifewire.com/thmb/unRdFjROthGxGQXL9SZIbc5BzeA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/summerbeach-5b4650c946e0fb005bfb3207.jpg"
+      />
+    </div>
+    <div *ngSwitchCase="'winter'">
+      <h3>Fri, 22 Dec, 2023 – Wed, 20 Mar, 2024</h3>
+      <img
+        width="350px"
+        height="250px"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6vic9Cmn4oeYqRGIY-8-3ryjXMZZCWdsUWg&usqp=CAU"
+      />
+    </div>
+    <div *ngSwitchCase="'rainy'">
+      <h3>Wed, 21 Jun, 2023 – Sat, 23 Sept, 2023</h3>
+      <img
+        width="350px"
+        height="250px"
+        src="https://www.verywellfamily.com/thmb/VSw-wdNOC4CRV7bmS0StpodWoU8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-607347689-62b0dfe33b8a439fb8557db1194e8c55.jpg"
+      />
+    </div>
+    <div *ngSwitchDefault style="margin:20px">  </div>
+  </div>
+
+  <a
+    ><button
+      (click)="showDetails()"
+      [style.backgroundColor]="vacantPosts ? 'green' : 'red'"
+    >
+      view details of vacancies
+    </button></a
+  >
+</div>

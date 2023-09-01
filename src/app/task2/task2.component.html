@@ -1,0 +1,15 @@
+<div >
+<p>task2 works!</p>
+<div style="align-items: center;gap:16px;display: flex;flex-direction: column;">
+  <h1>Post Form</h1>
+  <input type="text" placeholder="post title" [(ngModel)]="title"/>
+  <textarea placeholder="post details" [(ngModel)]="detials"></textarea >
+  <input type="text" placeholder="image" [(ngModel)]="image"/>
+  <input type="text" placeholder="postplace" [(ngModel)]="postplace"/>
+  <div><input type="checkbox" [(ngModel)]="background"/>Add Background</div>
+  <p [style.background]="background?'yellow':''">{{title}}</p>
+  <p>{{detials}}</p>
+  <img [src]="image"/>
+  <a [href]="postplace" [style.display] = "postplace?'block':'none'">View details</a>
+</div>
+</div>

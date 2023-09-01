@@ -1,0 +1,11 @@
+<h1>Navbar component</h1>
+<!-- routerLink="/detailForm"  -->
+<button 
+    (click) = 'routechange()'
+routerLinkActive = "active">Get forms</button>
+    <button [routerLink]="['/pipes',9,'pipeparam2']" 
+    [queryParams]="{pageno:1,perPage:10}"
+    routerLinkActive = "active"> Get pipes data</button>
+    <button routerLink="/postForm" routerLinkActive = "active"> post form</button>
+    <button routerLink="/" (click)="homebutton()" routerLinkActive = "active"> Home</button>
+

@@ -1,0 +1,176 @@
+<div class="form-area">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <h2>Template-driven angular forms</h2>
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+        type="text"
+        class="form-control"
+        ngModel
+        name="email"
+        #emailt="ngModel"
+        (change)="onChange(emailt)"
+        required
+        [ngClass]="{ 'is-invalid': emailt.touched && emailt.invalid }"
+        minlength="10"
+        maxLength="100"
+      />
+      <div *ngIf="emailt.errors">
+        <div
+          class="alert alert-danger"
+          *ngIf="emailt.errors?.required && emailt.touched && emailt.invalid"
+        >
+          Enter Email
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="emailt.errors?.minlength && emailt.touched && emailt.invalid"
+        >
+          Email must not less than 10 characters
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="emailt.errors?.pattern && emailt.touched && emailt.invalid"
+        >
+          Enter valid Email
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        ngModel
+        name="name"
+        #username="ngModel"
+        (change)="onChange(username)"
+        required
+      />
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+      Submit
+    </button>
+  </form>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+    <h2>Reactive forms</h2>
+    <div class="form-group">
+      <label>Email</label>
+      <input
+        pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+        type="text"
+        class="form-control"
+        formControlName="emailf"
+        name="email"
+      />
+      <div *ngIf="emailfun.touched && emailfun.invalid">
+        <div class="alert alert-danger" *ngIf="emailfun.errors?.required">
+          requires email
+        </div>
+        <div class="alert alert-danger" *ngIf="emailfun.errors?.pattern">
+          enter valid email
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        formControlName="namef"
+      />
+      <div *ngIf="namefun.touched && namefun.invalid">
+        <div class="alert alert-danger" *ngIf="namefun.errors?.required">
+          requires name
+        </div>
+        <div class="alert alert-danger" *ngIf="namefun.errors?.minlength">
+          requires name with more than 5 char
+        </div>
+        <div class="alert alert-danger" *ngIf="namefun.errors?.noSpaceValidator">
+          requires name with out space
+        </div>
+        <div class="alert alert-danger" *ngIf="namefun.errors?.noSpecialSymbolValidator">
+          requires name without special characters
+        </div>
+      </div>
+    </div>
+    <div formGroupName="address">
+      <label>Flatno</label>
+      <input type="text" class="form-control" formControlName="flatno" />
+      <label>Area</label>
+      <input type="text" class="form-control" formControlName="area" />
+      <label>Pincode</label>
+      <input type="text" class="form-control" formControlName="pincode" />
+    </div>
+    <div class="form-group">
+      <label>Skills you have</label>
+      <input
+        type="text"
+        class="form-control"
+        #skill
+        (keyup.enter)="addSkills(skill)"
+      />
+      <!-- <textarea name="" id="" cols="30" rows="10" class="form-control" #skill (keyup.enter)="addSkills(skill)"></textarea> -->
+      <div style="display: flex; gap: 16px; margin: 16px">
+        <div
+          *ngFor="let skill of skillslist.controls; let ind = index"
+          style="background-color: aliceblue; width: max-content; padding: 12px"
+        >
+          {{ skill.value }}
+          <a
+            (click)="delskill(ind)"
+            class="btn btn-sm btn-danger"
+            style="padding: 2px; margin: 0px"
+            >X</a
+          >
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+      Submit
+    </button>
+  </form>
+  <form [formGroup]="company" (ngSubmit)="saveCompanyDetails()">
+    <div>
+      <h2>If Experienced</h2>
+      <div class="form-group">
+        <label>company name</label>
+        <input type="text" class="form-control" formControlName="companyname" />
+        <div *ngIf="companyName.touched && companyName.invalid">
+          Enter proper company name
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Role name</label>
+        <input type="text" class="form-control" formControlName="role" />
+        <div *ngIf="role.touched && role.invalid">
+          Enter proper role name
+        </div>
+      </div>
+      <h3>Company address</h3>
+      <div formGroupName="companyaddress" class="form-group">
+        <label>company street</label>
+        <input type="text" class="form-control" formControlName="street" />
+        <label>city</label>
+        <input type="text" class="form-control" formControlName="city" />
+        <label>pincode</label>
+        <input type="text" class="form-control" formControlName="pincode" />
+      </div>
+      <div class="form-group">
+        <label>Add your project names</label>
+        <input type="text" class="form-control" #project (keyup.enter)="addProject(project)">
+        <div style="display: flex;gap:16px">
+          <div *ngFor="let project of projects.controls">
+            {{project.value}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="company.invalid">
+      Save
+    </button>
+  </form>
+</div>

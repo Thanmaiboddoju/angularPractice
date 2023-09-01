@@ -1,0 +1,21 @@
+<div>
+    <h1>{{title}}</h1>
+    <p>uppercase pipe-{{title | uppercase}}</p>
+    <p>lowercase pipe-{{title | lowercase}}</p>
+    <p>usage in -{{likes}}</p>
+    <p>number pipe -{{likes | number}}</p>
+    <p>{{cost | number:'2.2-2'}}</p>
+    <p>{{cost | currency:'INR'}}</p>
+    <p>{{date_today | date : 'dd-MM-YYYY'}}</p>
+    <p>percentage-{{0.988 | percent:'1.1-1'}}</p>
+    <p>{{pipes_available}}</p>
+    <p>{{pipes_available | slice:0:3   }}</p>
+    <p>{{pipes_available | slice:2:5   }}</p>
+    <p>{{"0572" | year}} {{"01" | branch:"CS"}}</p>
+    <p>{{"0012" | year}} {{"03" | branch:"CHEM"}}</p>
+    <!-- <p>{{"01" | branch:"CS"}}</p>
+    <p>{{"03" | branch:"CHEM"}}</p> -->
+
+
+
+</div>
